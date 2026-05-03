@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthPortal USSD · Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Ussd.css">
+</head>
+<body>
+
+    <!-- Top Bar -->
+    <header class="topbar">
+        <div class="topbar-brand">
+            <span class="brand-icon">⬡</span>
+            <span class="brand-name">HealthPortal</span>
+            <span class="brand-tag">USSD Control Center</span>
+        </div>
+        <div class="topbar-actions">
+            <div class="live-badge">
+                <span class="live-dot"></span>
+                LIVE
+            </div>
+            <button class="theme-toggle" id="theme-toggle" title="Toggle theme">
+                <span class="toggle-icon" id="toggle-icon">☀</span>
+            </button>
+        </div>
+    </header>
+
+    <div class="app-container">
+
+        <!-- LEFT: Phone Simulator -->
+        <aside class="phone-col">
+            <div class="phone-label">USSD SIMULATOR</div>
+            <div class="phone-wrap">
+                <div class="phone-bezel">
+                    <div class="phone-notch"></div>
+                    <div class="phone-speaker"></div>
+                    <div class="phone-screen">
+                        <div class="screen-header">
+                            <span class="screen-carrier">MTN GH</span>
+                            <span class="screen-signal">▂▄▆█</span>
+                        </div>
+                        <div class="screen-body">
+                            <div id="ussd-display" class="ussd-text">Enter USSD code&#10;e.g. *123#</div>
+                        </div>
+                    </div>
+                    <div class="phone-controls">
+                        <input type="text" id="ussd-input" placeholder="Type your input..." autocomplete="off" spellcheck="false">
+                        <div class="ctrl-buttons">
+                            <button id="ussd-submit" class="btn-send">
+                                <span>SEND</span>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                            </button>
+                            <button id="ussd-reset" class="btn-end">END CALL</button>
+                        </div>
+                    </div>
+                    <!-- Side buttons -->
+                    <div class="side-btn left-btn"></div>
+                    <div class="side-btn right-btn"></div>
+                </div>
+            </div>
+            <div class="phone-hint">Dial <strong>*123#</strong> to begin</div>
+        </aside>
+
+        <!-- RIGHT: Dashboard -->
+        <main class="dashboard-col">
+
+            <!-- Dashboard Header -->
+            <div class="dash-header">
+                <div>
+                    <h1>Clinic Admin Portal</h1>
+                    <p>Real-time USSD data feed · <span id="current-date"></span></p>
+                </div>
+            </div>
+
+            <!-- Stats Row -->
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-icon appt-icon">📅</div>
+                    <div class="stat-info">
+                        <span class="stat-label">Appointments Today</span>
+                        <span class="stat-value" id="stat-appointments">0</span>
+                    </div>
+                    <div class="stat-bar"><div class="stat-fill appt-fill" id="appt-fill"></div></div>
+                </div>
+                <div class="stat-card alert-stat">
+                    <div class="stat-icon alert-icon">⚠</div>
+                    <div class="stat-info">
+                        <span class="stat-label">Symptom Alerts</span>
+                        <span class="stat-value" id="stat-alerts">0</span>
+                    </div>
+                    <div class="stat-bar"><div class="stat-fill alert-fill" id="alert-fill"></div></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon session-icon">📶</div>
+                    <div class="stat-info">
+                        <span class="stat-label">Total Sessions</span>
+                        <span class="stat-value" id="stat-sessions">0</span>
+                    </div>
+                    <div class="stat-bar"><div class="stat-fill session-fill" id="session-fill"></div></div>
+                </div>
+            </div>
+
+            <!-- Activity Log Table -->
+            <div class="table-card">
+                <div class="table-header">
+                    <h2>Recent Activity Log</h2>
+                    <div class="table-meta">
+                        <span class="entry-count" id="entry-count">0 entries</span>
+                        <button class="clear-btn" id="clear-btn">Clear Log</button>
+                    </div>
+                </div>
+                <div class="table-scroll">
+                    <table id="data-table">
+                        <thead>
+                            <tr>
+                                <th>TIME</th>
+                                <th>PATIENT</th>
+                                <th>ACTION</th>
+                                <th>DETAILS</th>
+                                <th>STATUS</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body">
+                            <tr class="empty-state" id="empty-message">
+                                <td colspan="5">
+                                    <div class="empty-inner">
+                                        <span class="empty-icon">📡</span>
+                                        <span>Awaiting incoming USSD data...</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="Ussd.js"></script>
+</body>
+</html>
